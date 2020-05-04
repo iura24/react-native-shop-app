@@ -33,7 +33,6 @@ const ProductsOverviewScreen = (props) => {
       setError(err.message);
     }
     setIsRefreshing(false);
-
   }, [dispatch, setIsLoading, setError]);
 
   useEffect(() => {
@@ -125,7 +124,7 @@ const ProductsOverviewScreen = (props) => {
 ProductsOverviewScreen.navigationOptions = (navData) => {
   return {
     headerTitle: "All products",
-    headerLeft: (
+    headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Menu"
@@ -134,7 +133,7 @@ ProductsOverviewScreen.navigationOptions = (navData) => {
         />
       </HeaderButtons>
     ),
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Cart"
