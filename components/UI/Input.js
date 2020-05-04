@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: "open-sans-bold",
     marginVertical: 8,
+    fontSize: 16
   },
   input: {
     paddingHorizontal: 2,
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderBottomWidth: 1,
     borderColor: Colors.primary,
+    fontSize: 18,
   },
   errorContainer: {
     marginVertical: 5,
