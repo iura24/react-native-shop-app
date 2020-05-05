@@ -10,7 +10,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 
 import Colors from "../../constants/Colors";
-import * as cartActions from "../../store/actions/cart";
+import * as cartActions from "../../store/shop-actions/cart";
 
 const ProductDetailScreen = (props) => {
   const productId = props.navigation.getParam("productId");

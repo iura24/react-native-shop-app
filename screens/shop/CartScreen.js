@@ -12,8 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../constants/Colors";
 import Card from "../../components/UI/Card";
 import CartItem from "../../components/shop/CartItem";
-import * as cartActions from "../../store/actions/cart";
-import * as ordersActions from "../../store/actions/orders";
+import * as cartActions from "../../store/shop-actions/cart";
+import * as ordersActions from "../../store/shop-actions/orders";
 
 const CartScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);

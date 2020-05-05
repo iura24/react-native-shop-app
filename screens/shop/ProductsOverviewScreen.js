@@ -13,8 +13,8 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import HeaderButton from "../../components/UI/HeaderButton";
 import ProductItem from "../../components/shop/ProductItem";
-import * as cartAction from "../../store/actions/cart";
-import * as productsActions from "../../store/actions/products";
+import * as cartAction from "../../store/shop-actions/cart";
+import * as productsActions from "../../store/shop-actions/products";
 import Colors from "../../constants/Colors";
 
 const ProductsOverviewScreen = (props) => {

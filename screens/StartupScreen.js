@@ -8,7 +8,7 @@ import {
 import { useDispatch } from "react-redux";
 
 import Colors from "../constants/Colors";
-import * as authActions from "../store/actions/auth";
+import * as authActions from "../store/shop-actions/auth";
 
 const StartupScreen = (props) => {
   const dispatch = useDispatch();

@@ -5,10 +5,11 @@ import thunk from "redux-thunk";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 
-import productsReducer from "./store/reducers/products";
-import cartReducer from "./store/reducers/cart";
-import ordersReducer from "./store/reducers/orders";
-import authReducer from "./store/reducers/auth";
+import productsReducer from "./store/shop-reducers/products";
+import cartReducer from "./store/shop-reducers/cart";
+import ordersReducer from "./store/shop-reducers/orders";
+import authReducer from "./store/shop-reducers/auth";
+import placesReducer from "./store/places-reducer";
 import NavigationContainer from "./navigation/NavigationContainer";
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   orders: ordersReducer,
   auth: authReducer,
+  places: placesReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

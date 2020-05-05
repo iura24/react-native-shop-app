@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import Input from "../../components/UI/Input";
 import Card from "../../components/UI/Card";
 import Colors from "../../constants/Colors";
-import * as authActions from "../../store/actions/auth";
+import * as authActions from "../../store/shop-actions/auth";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 

@@ -18,7 +18,7 @@ import PlacesListScreen from "../screens/places/PlacesListScreen";
 import PlaceDetailScreen from "../screens/places/PlaceDetailScreen";
 import NewPlaceScreen from "../screens/places/NewPlaceScreen";
 import MapScreen from "../screens/places/MapScreen";
-import * as authActions from "../store/actions/auth";
+import * as authActions from "../store/shop-actions/auth";
 import Colors from "../constants/Colors";
 
 const defaultNavOptions = {

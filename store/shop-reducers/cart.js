@@ -1,7 +1,7 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/cart";
-import { ADD_ORDER } from "../actions/orders";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../shop-actions/cart";
+import { ADD_ORDER } from "../shop-actions/orders";
 import CartItem from "../../models/cart-item";
-import { DELETE_PRODUCT } from "../actions/products";
+import { DELETE_PRODUCT } from "../shop-actions/products";
 
 const initialState = {
   items: {},
