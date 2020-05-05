@@ -19,7 +19,7 @@ const PlacesListScreen = (props) => {
               placeIt: itemData.item.id,
             });
           }}
-          image={"asdsa"}
+          image={itemData.item.imageUri}
           title={itemData.item.title}
           address={""}
         />
