@@ -14,6 +14,10 @@ import UserProductsScreen from "../screens/user/UserProductsScreen";
 import EditProductScreen from "../screens/user/EditProductScreen";
 import AuthScreen from "../screens/user/AuthScreen";
 import StartupScreen from "../screens/StartupScreen";
+import PlacesListScreen from "../screens/places/PlacesListScreen";
+import PlaceDetailScreen from "../screens/places/PlaceDetailScreen";
+import NewPlaceScreen from "../screens/places/NewPlaceScreen";
+import MapScreen from "../screens/places/MapScreen";
 import * as authActions from "../store/actions/auth";
 import Colors from "../constants/Colors";
 
@@ -95,11 +99,33 @@ const AdminNavigator = createStackNavigator(
   }
 );
 
+const PlacesNavigator = createStackNavigator(
+  {
+    Places: PlacesListScreen,
+    PlaceDetail: PlaceDetailScreen,
+    NewPlace: NewPlaceScreen,
+    Map: MapScreen,
+  },
+  {
+    navigationOptions: {
+      drawerIcon: (drawerConfig) => (
+        <Ionicons
+          name={Platform.OS === "android" ? "md-map" : "ios-map"}
+          size={23}
+          color={drawerConfig.tintColor}
+        />
+      ),
+    },
+    defaultNavigationOptions: defaultNavOptions,
+  },
+);
+
 const ShopNavigator = createDrawerNavigator(
   {
     Products: ProductsNavigator,
     Orders: OrdersNavigator,
     Admin: AdminNavigator,
+    Places: PlacesNavigator,
   },
   {
     contentOptions: {
