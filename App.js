@@ -5,12 +5,22 @@ import thunk from "redux-thunk";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 
+import { init } from "./helpers/db";
 import productsReducer from "./store/shop-reducers/products";
 import cartReducer from "./store/shop-reducers/cart";
 import ordersReducer from "./store/shop-reducers/orders";
 import authReducer from "./store/shop-reducers/auth";
 import placesReducer from "./store/places-reducer";
 import NavigationContainer from "./navigation/NavigationContainer";
+
+init()
+  .then(() => {
+    console.log("Initialized database");
+  })
+  .catch((err) => {
+    console.log("Initialized db failed");
+    console.log(err);
+  });
 
 const rootReducer = combineReducers({
   products: productsReducer,
