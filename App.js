@@ -11,11 +11,10 @@ import cartReducer from "./store/shop-reducers/cart";
 import ordersReducer from "./store/shop-reducers/orders";
 import authReducer from "./store/shop-reducers/auth";
 import placesReducer from "./store/places-reducer";
-import NavigationContainer from "./navigation/NavigationContainer";
+import AppNavigator from "./navigation/AppNavigator";
 
 init()
-  .then(() => {
-  })
+  .then(() => {})
   .catch((err) => {
     console.log("Initialized db failed");
   });
@@ -52,7 +51,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <NavigationContainer />
+      <AppNavigator />
     </Provider>
   );
 }
