@@ -34,7 +34,7 @@ const PlacesListScreen = (props) => {
   );
 };
 
-PlacesListScreen.navigationOptions = (navData) => {
+export const placesListScreenOptions = (navData) => {
   return {
     headerTitle: "All Places",
     headerLeft: () => (

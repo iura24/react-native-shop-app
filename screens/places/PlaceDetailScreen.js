@@ -38,7 +38,7 @@ const PlaceDetailScreen = (props) => {
   );
 };
 
-PlaceDetailScreen.navigationOptions = (navData) => {
+export const placeDetailScreenOptions = (navData) => {
   return {
     headerTitle: navData.navigation.getParam("placeTitle"),
   };
