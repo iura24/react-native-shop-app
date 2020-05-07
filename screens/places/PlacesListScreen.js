@@ -22,12 +22,12 @@ const PlacesListScreen = (props) => {
           onSelect={() => {
             props.navigation.navigate("PlaceDetail", {
               placeTitle: itemData.item.title,
-              placeIt: itemData.item.id,
+              placeId: itemData.item.id,
             });
           }}
           image={itemData.item.imageUri}
           title={itemData.item.title}
-          address={""}
+          address={itemData.item.address}
         />
       )}
     />

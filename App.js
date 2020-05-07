@@ -15,11 +15,9 @@ import NavigationContainer from "./navigation/NavigationContainer";
 
 init()
   .then(() => {
-    console.log("Initialized database");
   })
   .catch((err) => {
     console.log("Initialized db failed");
-    console.log(err);
   });
 
 const rootReducer = combineReducers({

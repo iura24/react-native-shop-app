@@ -18,12 +18,14 @@ const LocationPicker = (props) => {
   const [pickedLocation, setPickedLocation] = useState();
 
   const mapPickedLocation = props.navigation.getParam("pickedLocation");
+  const { onLocationPicked } = props;
 
   useEffect(() => {
     if (mapPickedLocation) {
       setPickedLocation(mapPickedLocation);
+      onLocationPicked(mapPickedLocation);
     }
-  }, [mapPickedLocation]);
+  }, [mapPickedLocation, onLocationPicked]);
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -52,9 +54,12 @@ const LocationPicker = (props) => {
 
       setPickedLocation({
         lat: location.coords.latitude,
-        lng: location.coords.longitude,
+        long: location.coords.longitude,
       });
-      console.log(pickedLocation);
+      props.onLocationPicked({
+        lat: location.coords.latitude,
+        long: location.coords.longitude,
+      });
     } catch (err) {
       Alert.alert(
         "Could not fetch location!",
@@ -62,7 +67,6 @@ const LocationPicker = (props) => {
         [{ text: "Okay" }]
       );
     }
-    console.log(pickedLocation);
     setIsFetching(false);
   };
 

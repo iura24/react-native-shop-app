@@ -1,9 +1,9 @@
 const variables = {
   development: {
-    googleApiKey: "",
+    googleApiKey: "AIzaSyDmzMwYNHgFeZiW8afSPHq3xmUVgs6UVso",
   },
   production: {
-    googleApiKey: "",
+    googleApiKey: "AIzaSyDmzMwYNHgFeZiW8afSPHq3xmUVgs6UVso",
   },
 };
 
