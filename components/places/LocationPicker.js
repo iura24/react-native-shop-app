@@ -18,6 +18,7 @@ const LocationPicker = (props) => {
   const [pickedLocation, setPickedLocation] = useState();
 
   const mapPickedLocation = props.navigation.getParam("pickedLocation");
+  
   const { onLocationPicked } = props;
 
   useEffect(() => {

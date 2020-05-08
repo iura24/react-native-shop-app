@@ -5,8 +5,8 @@ import MapView, { Marker } from "react-native-maps";
 import Colors from "../../constants/Colors";
 
 const MapScreen = (props) => {
-  const initialLocation = props.navigation.getParam("initialLocation");
-  const readonly = props.navigation.getParam("readonly");
+  const initialLocation = props.route.params.initialLocation;
+  const readonly = props.route.params.readonly;
 
   const [selectedLocation, setSelectedLocation] = useState(initialLocation);
   const mapRegion = {
@@ -34,7 +34,19 @@ const MapScreen = (props) => {
   }, [selectedLocation]);
 
   useEffect(() => {
-    props.navigation.setParams({ saveLocation: savePickedLocationHandler });
+    if (readonly) {
+      return;
+    }
+    props.navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          style={styles.headerButton}
+          onPress={savePickedLocationHandler}
+        >
+          <Text style={styles.headerButtonText}>Save</Text>
+        </TouchableOpacity>
+      ),
+    });
   }, [savePickedLocationHandler]);
 
   let markerCoordinates;
@@ -59,18 +71,18 @@ const MapScreen = (props) => {
 };
 
 export const mapScreenOptions = (navData) => {
-  const saveFn = navData.navigation.getParam("saveLocation");
-  const readonly = navData.navigation.getParam("readonly");
-  if (readonly) {
-    return {};
-  }
-  return {
-    headerRight: () => (
-      <TouchableOpacity style={styles.headerButton} onPress={saveFn}>
-        <Text style={styles.headerButtonText}>Save</Text>
-      </TouchableOpacity>
-    ),
-  };
+  // const saveFn = navData.navigation.getParam("saveLocation");
+  // const readonly = navData.navigation.getParam("readonly");
+  // if (readonly) {
+  //   return {};
+  // }
+  // return {
+  //   headerRight: () => (
+  //     <TouchableOpacity style={styles.headerButton} onPress={saveFn}>
+  //       <Text style={styles.headerButtonText}>Save</Text>
+  //     </TouchableOpacity>
+  //   ),
+  // };
 };
 
 const styles = StyleSheet.create({

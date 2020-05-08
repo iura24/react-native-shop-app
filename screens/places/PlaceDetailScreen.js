@@ -6,7 +6,7 @@ import MapPreview from "../../components/places/MapPreview";
 import Colors from "../../constants/Colors";
 
 const PlaceDetailScreen = (props) => {
-  const placeId = props.navigation.getParam("placeId");
+  const placeId = props.route.params.placeId;
   console.log(placeId);
 
   const selectedPlace = useSelector((state) =>
@@ -40,7 +40,7 @@ const PlaceDetailScreen = (props) => {
 
 export const placeDetailScreenOptions = (navData) => {
   return {
-    headerTitle: navData.navigation.getParam("placeTitle"),
+    headerTitle: navData.route.params.placeTitle,
   };
 };
 
