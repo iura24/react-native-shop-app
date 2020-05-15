@@ -24,17 +24,18 @@ const CartScreen = (props) => {
     for (const key in state.cart.items) {
       transformedCartItems.push({
         productId: key,
+        imageUrl: state.cart.items[key].imageUrl,
         productTitle: state.cart.items[key].productTitle,
         productPrice: state.cart.items[key].productPrice,
         quantity: state.cart.items[key].quantity,
         sum: state.cart.items[key].sum,
       });
+      // console.log(state);
     }
     return transformedCartItems.sort((a, b) =>
       a.productId > b.productId ? 1 : -1
     );
   });
-
   const dispatch = useDispatch();
 
   const sendOrderHandler = async () => {

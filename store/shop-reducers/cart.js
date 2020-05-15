@@ -14,18 +14,27 @@ export default state = (state = initialState, action) => {
       const addedProduct = action.product;
       const prodPrice = addedProduct.price;
       const prodTitle = addedProduct.title;
-
+      const prodImage = addedProduct.imageUrl;
+      // console.log(prodImage);
       let updatedOrNewCartItem;
 
       if (state.items[addedProduct.id]) {
+        console.log(state.items[addedProduct.id]);
         updatedOrNewCartItem = new CartItem(
+          prodImage,
           state.items[addedProduct.id].quantity + 1,
           prodPrice,
           prodTitle,
           state.items[addedProduct.id].sum + prodPrice
         );
       } else {
-        updatedOrNewCartItem = new CartItem(1, prodPrice, prodTitle, prodPrice);
+        updatedOrNewCartItem = new CartItem(
+          prodImage,
+          1,
+          prodPrice,
+          prodTitle,
+          prodPrice
+        );
       }
       return {
         ...state,

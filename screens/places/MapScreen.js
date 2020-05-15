@@ -17,7 +17,7 @@ const MapScreen = (props) => {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
-  console.log(mapRegion);
+  // console.log(mapRegion);
 
   const selectLocationHandler = (event) => {
     if (readonly) {
