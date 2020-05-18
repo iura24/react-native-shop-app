@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import Card from "../UI/Card";
+import Colors from "../../constants/Colors";
 
 const OrderItem = (props) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -11,6 +13,13 @@ const OrderItem = (props) => {
       <View style={styles.summary}>
         <Text style={styles.date}>{props.date}</Text>
         <Text style={styles.totalAmount}>${props.amount.toFixed(2)}</Text>
+        <Ionicons
+          name={
+            Platform.OS === "android" ? "md-arrow-forward" : "ios-arrow-forward"
+          }
+          size={23}
+          color={Colors.primary}
+        />
       </View>
     </Card>
   );

@@ -1,4 +1,4 @@
-import { ADD_ORDER, SET_ORDERS } from "../shop-actions/orders";
+import { ADD_ORDER, SET_ORDERS, DELETE_ORDER } from "../shop-actions/orders";
 import Order from "../../models/order";
 
 const initialState = {
@@ -21,6 +21,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         orders: state.orders.concat(newOrder),
+      };
+    case DELETE_ORDER:
+      return {
+        ...state,
+        orders: state.orders.filter((order) => order.id !== action.oid),
       };
   }
   return state;

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Alert,
+  ImageBackground,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch } from "react-redux";
@@ -100,14 +101,14 @@ const AuthScreen = (props) => {
     },
     [dispatchFormState]
   );
-
+  const bacggroundImage = {
+    uri:
+      "https://images.pexels.com/photos/3952076/pexels-photo-3952076.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  };
   return (
-    <KeyboardAvoidingView
-      behavior="padding"
-      keyboardVerticalOffset={50}
-      style={styles.screen}
-    >
-      <LinearGradient colors={["#be93c5", "#7bc6cc"]} style={styles.gradient}>
+    <KeyboardAvoidingView behavior="padding" style={styles.screen}>
+      {/* <LinearGradient colors={["#be93c5", "#7bc6cc"]} style={styles.gradient}> */}
+      <ImageBackground style={styles.gradient} source={bacggroundImage}>
         <Card style={styles.authContainer}>
           <ScrollView>
             <Input
@@ -155,12 +156,14 @@ const AuthScreen = (props) => {
             </View>
           </ScrollView>
         </Card>
-      </LinearGradient>
+      </ImageBackground>
+      {/* </LinearGradient> */}
     </KeyboardAvoidingView>
   );
 };
 
 export const authScreenOptions = {
+  headerShown: false,
   headerTitle: "Authenticate",
 };
 

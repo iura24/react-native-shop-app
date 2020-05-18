@@ -1,5 +1,6 @@
 export const ADD_ORDER = "ADD_ORDER";
 export const SET_ORDERS = "SET_ORDERS";
+export const DELETE_ORDER = "DELETE_ORDER";
 
 import Order from "../../models/order";
 
@@ -71,5 +72,22 @@ export const addOrder = (cartItems, totalAmount) => {
         date: date,
       },
     });
+  };
+};
+
+export const deleteOrder = (orderId) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
+    const userId = getState().auth.userId;
+    const response = await fetch(
+      `https://rn-shop-app-3387e.firebaseio.com/orders/${userId}/${orderId}.json?auth=${token}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Something went wrong!");
+    }
+    dispatch({ type: DELETE_ORDER, oid: orderId });
   };
 };

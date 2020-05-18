@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import HeaderButton from "../../components/UI/HeaderButton";
-
 import OrderItem from "../../components/shop/OrderItem";
 import * as ordersActions from "../../store/shop-actions/orders";
 import Colors from "../../constants/Colors";
@@ -21,7 +20,6 @@ const OrdersScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const orders = useSelector((state) => state.orders.orders);
-  // console.log(orders);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 100,
     justifyContent: "space-between",
-    marginHorizontal: 70,
+    marginHorizontal: 30,
     marginBottom: 35,
   },
   totalAmount: {
