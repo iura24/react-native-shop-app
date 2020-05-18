@@ -22,7 +22,7 @@ const OrderDetailsItem = (props) => {
             {props.quantity} x ${props.productPrice}
           </Text>
         </View>
-        <Text style={{ color: Colors.primary }}>${props.sum}</Text>
+        <Text style={{ color: Colors.primary }}>${props.sum.toFixed(2)}</Text>
       </View>
     </View>
   );

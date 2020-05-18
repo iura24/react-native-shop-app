@@ -1,46 +1,21 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
 import {
   createDrawerNavigator,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { Platform, SafeAreaView, Button, View } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Platform, SafeAreaView, Button, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 
-import ProductsOverviewScreen, {
-  productsOverviewScreenOptions,
-} from "../screens/shop/ProductsOverviewScreen";
-import ProductDetailScreen, {
-  productDetailScreenOptions,
-} from "../screens/shop/ProductDetailScreen";
-import CartScreen, { cartScreenOptions } from "../screens/shop/CartScreen";
-import OrdersScreen, {
-  ordersScreenOptions,
-} from "../screens/shop/OrdersScreen";
-import UserProductsScreen, {
-  userProductsScreenOptions,
-} from "../screens/user/UserProductsScreen";
-import EditProductScreen, {
-  editProductScreenOptions,
-} from "../screens/user/EditProductScreen";
-import AuthScreen, { authScreenOptions } from "../screens/user/AuthScreen";
-import StartupScreen from "../screens/StartupScreen";
-import PlacesListScreen, {
-  placesListScreenOptions,
-} from "../screens/places/PlacesListScreen";
-import PlaceDetailScreen, {
-  placeDetailScreenOptions,
-} from "../screens/places/PlaceDetailScreen";
-import NewPlaceScreen, {
-  newPlaceScreenOptions,
-} from "../screens/places/NewPlaceScreen";
-import MapScreen, { mapScreenOptions } from "../screens/places/MapScreen";
 import * as authActions from "../store/shop-actions/auth";
 import Colors from "../constants/Colors";
-import OrderDetailScreen, {
-  orderDetailScreenOptions,
-} from "../screens/shop/OrderDetailScreen";
+
+import ProductsNavigator from "./stack_navigators/ProductsNavigator";
+import OrdersNavigator from "./stack_navigators/OrdersNavigator";
+import AdminNavigator from "./stack_navigators/AdminNavigator";
+import PlacesNavigator from "./stack_navigators/PlacesNavigator";
+import CartNavigator from "./stack_navigators/CartNavigator";
 
 const defaultNavOptions = {
   headerStyle: {
@@ -54,98 +29,6 @@ const defaultNavOptions = {
   },
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
 };
-
-const ProductsStackNavigator = createStackNavigator();
-
-export const ProductsNavigator = () => {
-  return (
-    <ProductsStackNavigator.Navigator screenOptions={defaultNavOptions}>
-      <ProductsStackNavigator.Screen
-        name="ProductsOverview"
-        component={ProductsOverviewScreen}
-        options={productsOverviewScreenOptions}
-      />
-      <ProductsStackNavigator.Screen
-        name="ProductDetail"
-        component={ProductDetailScreen}
-        options={productDetailScreenOptions}
-      />
-      <ProductsStackNavigator.Screen
-        name="Cart"
-        component={CartScreen}
-        options={cartScreenOptions}
-      />
-    </ProductsStackNavigator.Navigator>
-  );
-};
-
-const OrdersStackNavigator = createStackNavigator();
-
-export const OrdersNavigator = () => {
-  return (
-    <OrdersStackNavigator.Navigator screenOptions={defaultNavOptions}>
-      <OrdersStackNavigator.Screen
-        name="Orders"
-        component={OrdersScreen}
-        options={ordersScreenOptions}
-      />
-      <OrdersStackNavigator.Screen
-        name="OrderDetail"
-        component={OrderDetailScreen}
-        options={orderDetailScreenOptions}
-      />
-    </OrdersStackNavigator.Navigator>
-  );
-};
-
-const AdminStackNavigator = createStackNavigator();
-
-export const AdminNavigator = () => {
-  return (
-    <AdminStackNavigator.Navigator screenOptions={defaultNavOptions}>
-      <AdminStackNavigator.Screen
-        name="UserProducts"
-        component={UserProductsScreen}
-        options={userProductsScreenOptions}
-      />
-      <AdminStackNavigator.Screen
-        name="EditProduct"
-        component={EditProductScreen}
-        options={editProductScreenOptions}
-      />
-    </AdminStackNavigator.Navigator>
-  );
-};
-
-const PlacesStackNavigator = createStackNavigator();
-
-export const PlacesNavigator = () => {
-  return (
-    <PlacesStackNavigator.Navigator screenOptions={defaultNavOptions}>
-      <PlacesStackNavigator.Screen
-        name="Places"
-        component={PlacesListScreen}
-        options={placesListScreenOptions}
-      />
-      <PlacesStackNavigator.Screen
-        name="PlaceDetail"
-        component={PlaceDetailScreen}
-        options={placeDetailScreenOptions}
-      />
-      <PlacesStackNavigator.Screen
-        name="NewPlace"
-        component={NewPlaceScreen}
-        options={newPlaceScreenOptions}
-      />
-      <PlacesStackNavigator.Screen
-        name="Map"
-        component={MapScreen}
-        options={mapScreenOptions}
-      />
-    </PlacesStackNavigator.Navigator>
-  );
-};
-
 const ShopDrawerNavigator = createDrawerNavigator();
 
 export const ShopNavigator = () => {
@@ -229,16 +112,42 @@ export const ShopNavigator = () => {
   );
 };
 
-const AuthStackNavigator = createStackNavigator();
+const ShopTabNavigator = createBottomTabNavigator();
 
-export const AuthNavigator = () => {
+export const TabNavigator = () => {
   return (
-    <AuthStackNavigator.Navigator screenOptions={defaultNavOptions}>
-      <AuthStackNavigator.Screen
-        name="Auth"
-        component={AuthScreen}
-        options={authScreenOptions}
-      />
-    </AuthStackNavigator.Navigator>
+    <ShopTabNavigator.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+
+          if (route.name === "TabShop") {
+            iconName = "ios-list";
+          } else if (route.name === "Cart") {
+            iconName = "ios-cart";
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarLabel: ({ color }) => {
+          let title;
+
+          if (route.name === "TabShop") {
+            title = "Products";
+          } else if (route.name === "Cart") {
+            title = "Cart";
+          }
+
+          return <Text style={{ color: color }}>{title}</Text>;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: Colors.primary,
+        activeBackgroundColor: "#f2f2f2",
+      }}
+    >
+      <ShopTabNavigator.Screen name="TabShop" component={ShopNavigator} />
+      <ShopTabNavigator.Screen name="Cart" component={CartNavigator} />
+    </ShopTabNavigator.Navigator>
   );
 };

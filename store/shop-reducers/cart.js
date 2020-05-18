@@ -48,6 +48,7 @@ export default state = (state = initialState, action) => {
       let updatedCartItems;
       if (currentQty > 1) {
         const updatedCartItem = new CartItem(
+          selectedCartItem.imageUrl,
           selectedCartItem.quantity - 1,
           selectedCartItem.productPrice,
           selectedCartItem.productTitle,

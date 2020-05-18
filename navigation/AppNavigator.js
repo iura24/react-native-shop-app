@@ -2,7 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 
-import { ShopNavigator, AuthNavigator } from "./ShopNavigator";
+import { TabNavigator } from "./ShopNavigator";
+import AuthNavigator from "./stack_navigators/AuthNavigator";
 import StartupScreen from "../screens/StartupScreen";
 
 const AppNavigator = (props) => {
@@ -11,10 +12,9 @@ const AppNavigator = (props) => {
 
   return (
     <NavigationContainer>
-      {isAuth && <ShopNavigator />}
+      {isAuth && <TabNavigator />}
       {!isAuth && didTryAutoLogin && <AuthNavigator />}
       {!isAuth && !didTryAutoLogin && <StartupScreen />}
-      
     </NavigationContainer>
   );
 };
