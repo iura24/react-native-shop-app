@@ -6,6 +6,7 @@ import { DELETE_PRODUCT } from "../shop-actions/products";
 const initialState = {
   items: {},
   totalAmount: 0,
+  totalItems: 0,
 };
 
 export default state = (state = initialState, action) => {
@@ -15,11 +16,9 @@ export default state = (state = initialState, action) => {
       const prodPrice = addedProduct.price;
       const prodTitle = addedProduct.title;
       const prodImage = addedProduct.imageUrl;
-      // console.log(prodImage);
       let updatedOrNewCartItem;
 
       if (state.items[addedProduct.id]) {
-        console.log(state.items[addedProduct.id]);
         updatedOrNewCartItem = new CartItem(
           prodImage,
           state.items[addedProduct.id].quantity + 1,
@@ -40,6 +39,7 @@ export default state = (state = initialState, action) => {
         ...state,
         items: { ...state.items, [addedProduct.id]: updatedOrNewCartItem },
         totalAmount: state.totalAmount + prodPrice,
+        totalItems: state.totalItems + 1,
       };
     case REMOVE_FROM_CART:
       const selectedCartItem = state.items[action.pid];
@@ -63,6 +63,7 @@ export default state = (state = initialState, action) => {
         ...state,
         items: updatedCartItems,
         totalAmount: state.totalAmount - selectedCartItem.productPrice,
+        totalItems: state.totalItems - 1
       };
     case ADD_ORDER:
       return initialState;

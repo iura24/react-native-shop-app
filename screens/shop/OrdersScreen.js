@@ -68,9 +68,6 @@ const OrdersScreen = (props) => {
               date={itemData.item.readableDate}
               items={itemData.item.items}
               navigation={props.navigation}
-              // onSelect={() => {
-              //   selectItemHandler(itemData.item.id, itemData.item.title);
-              // }}
             />
           </TouchableOpacity>
         )}
@@ -86,8 +83,10 @@ export const ordersScreenOptions = (navData) => {
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Menu"
-          iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
-          onPress={() => navData.navigation.toggleDrawer()}
+          iconName={
+            Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
+          }
+          onPress={() => navData.navigation.goBack()}
         />
       </HeaderButtons>
     ),

@@ -7,12 +7,13 @@ import UserProductsScreen, {
 import EditProductScreen, {
   editProductScreenOptions,
 } from "../../screens/user/EditProductScreen";
+import { defaultNavOptions } from "../../constants/defaultNavOptions";
 
 const AdminStackNavigator = createStackNavigator();
 
 export default AdminNavigator = () => {
   return (
-    <AdminStackNavigator.Navigator>
+    <AdminStackNavigator.Navigator screenOptions={defaultNavOptions}>
       <AdminStackNavigator.Screen
         name="UserProducts"
         component={UserProductsScreen}

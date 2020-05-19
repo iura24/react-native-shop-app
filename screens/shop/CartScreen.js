@@ -46,6 +46,21 @@ const CartScreen = (props) => {
 
   return (
     <View style={styles.screen}>
+      <FlatList
+        data={cartItems}
+        keyExtractor={(item) => item.productId}
+        renderItem={(itemData) => (
+          <CartItem
+            quantity={itemData.item.quantity}
+            title={itemData.item.productTitle}
+            amount={itemData.item.sum}
+            deletable
+            onRemove={() => {
+              dispatch(cartActions.removeFromCart(itemData.item.productId));
+            }}
+          />
+        )}
+      />
       <Card style={styles.summary}>
         <Text style={styles.summaryText}>
           Total:{" "}
@@ -64,21 +79,6 @@ const CartScreen = (props) => {
           />
         )}
       </Card>
-      <FlatList
-        data={cartItems}
-        keyExtractor={(item) => item.productId}
-        renderItem={(itemData) => (
-          <CartItem
-            quantity={itemData.item.quantity}
-            title={itemData.item.productTitle}
-            amount={itemData.item.sum}
-            deletable
-            onRemove={() => {
-              dispatch(cartActions.removeFromCart(itemData.item.productId));
-            }}
-          />
-        )}
-      />
     </View>
   );
 };
@@ -90,6 +90,7 @@ export const cartScreenOptions = {
 const styles = StyleSheet.create({
   screen: {
     margin: 20,
+    flex: 1,
   },
   summary: {
     flexDirection: "row",

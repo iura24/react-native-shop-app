@@ -7,12 +7,13 @@ import OrdersScreen, {
 import OrderDetailScreen, {
   orderDetailScreenOptions,
 } from "../../screens/shop/OrderDetailScreen";
+import { defaultNavOptions } from "../../constants/defaultNavOptions";
 
 const OrdersStackNavigator = createStackNavigator();
 
 export default OrdersNavigator = () => {
   return (
-    <OrdersStackNavigator.Navigator>
+    <OrdersStackNavigator.Navigator screenOptions={defaultNavOptions}>
       <OrdersStackNavigator.Screen
         name="Orders"
         component={OrdersScreen}

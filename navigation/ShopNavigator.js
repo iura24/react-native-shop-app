@@ -16,19 +16,8 @@ import OrdersNavigator from "./stack_navigators/OrdersNavigator";
 import AdminNavigator from "./stack_navigators/AdminNavigator";
 import PlacesNavigator from "./stack_navigators/PlacesNavigator";
 import CartNavigator from "./stack_navigators/CartNavigator";
+import IconWithBadge from "../components/UI/IconWithBadge";
 
-const defaultNavOptions = {
-  headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primary : "",
-  },
-  headerTitleStyle: {
-    fontFamily: "open-sans-bold",
-  },
-  headerBackTitleStyle: {
-    fontFamily: "open-sans",
-  },
-  headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
-};
 const ShopDrawerNavigator = createDrawerNavigator();
 
 export const ShopNavigator = () => {
@@ -45,7 +34,6 @@ export const ShopNavigator = () => {
                 color={Colors.primary}
                 onPress={() => {
                   dispatch(authActions.logout());
-                  // props.navigation.navigate("Auth");
                 }}
               />
             </SafeAreaView>
@@ -124,26 +112,18 @@ export const TabNavigator = () => {
           if (route.name === "TabShop") {
             iconName = "ios-list";
           } else if (route.name === "Cart") {
-            iconName = "ios-cart";
+            return (
+              <IconWithBadge name={"ios-cart"} color={color} size={size} />
+            );
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
-        },
-        tabBarLabel: ({ color }) => {
-          let title;
-
-          if (route.name === "TabShop") {
-            title = "Products";
-          } else if (route.name === "Cart") {
-            title = "Cart";
-          }
-
-          return <Text style={{ color: color }}>{title}</Text>;
         },
       })}
       tabBarOptions={{
         activeTintColor: Colors.primary,
         activeBackgroundColor: "#f2f2f2",
+        showLabel: false,
       }}
     >
       <ShopTabNavigator.Screen name="TabShop" component={ShopNavigator} />

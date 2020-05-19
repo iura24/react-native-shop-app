@@ -11,12 +11,13 @@ import NewPlaceScreen, {
   newPlaceScreenOptions,
 } from "../../screens/places/NewPlaceScreen";
 import MapScreen, { mapScreenOptions } from "../../screens/places/MapScreen";
+import { defaultNavOptions } from "../../constants/defaultNavOptions";
 
 const PlacesStackNavigator = createStackNavigator();
 
 export default PlacesNavigator = () => {
   return (
-    <PlacesStackNavigator.Navigator>
+    <PlacesStackNavigator.Navigator screenOptions={defaultNavOptions}>
       <PlacesStackNavigator.Screen
         name="Places"
         component={PlacesListScreen}
