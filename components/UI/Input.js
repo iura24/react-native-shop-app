@@ -1,8 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
-import Colors from "../../constants/Colors";
-
 const INPUT_CHANGE = "INPUT_CHANGE";
 const INPUT_BLUR = "INPUT_BLUR";
 
@@ -59,11 +57,11 @@ const Input = (props) => {
 
   return (
     <View style={styles.formControl}>
-      <Text style={styles.label}>{props.label}</Text>
       <TextInput
         {...props}
         style={styles.input}
         value={inputState.value}
+        placeholder={props.label}
         onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
       />
@@ -80,18 +78,13 @@ const styles = StyleSheet.create({
   formControl: {
     width: "100%",
   },
-  label: {
-    fontFamily: "open-sans-bold",
-    marginVertical: 8,
-    fontSize: 16
-  },
   input: {
-    paddingHorizontal: 2,
+    marginVertical: 20,
     paddingVertical: 5,
-    backgroundColor: "white",
     borderBottomWidth: 1,
-    borderColor: Colors.primary,
+    borderColor: "#ccc",
     fontSize: 18,
+    marginBottom: 0,
   },
   errorContainer: {
     marginVertical: 5,

@@ -41,6 +41,7 @@ export const addOrder = (cartItems, totalAmount) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
+    console.log(getState());
     const date = new Date();
     const response = await fetch(
       `https://rn-shop-app-3387e.firebaseio.com/orders/${userId}.json?auth=${token}`,

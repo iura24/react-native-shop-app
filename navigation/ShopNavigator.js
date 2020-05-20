@@ -17,6 +17,7 @@ import AdminNavigator from "./stack_navigators/AdminNavigator";
 import PlacesNavigator from "./stack_navigators/PlacesNavigator";
 import CartNavigator from "./stack_navigators/CartNavigator";
 import IconWithBadge from "../components/UI/IconWithBadge";
+import UserNavigator from "./stack_navigators/UserNavigator";
 
 const ShopDrawerNavigator = createDrawerNavigator();
 
@@ -29,13 +30,6 @@ export const ShopNavigator = () => {
           <View style={{ flex: 1, padding: 20 }}>
             <SafeAreaView forceInset={{ top: "always", horizontal: "never" }}>
               <DrawerItemList {...props} />
-              <Button
-                title="Logout"
-                color={Colors.primary}
-                onPress={() => {
-                  dispatch(authActions.logout());
-                }}
-              />
             </SafeAreaView>
           </View>
         );
@@ -51,19 +45,6 @@ export const ShopNavigator = () => {
           drawerIcon: (props) => (
             <Ionicons
               name={Platform.OS === "android" ? "md-cart" : "ios-cart"}
-              size={23}
-              color={props.color}
-            />
-          ),
-        }}
-      />
-      <ShopDrawerNavigator.Screen
-        name="Orders"
-        component={OrdersNavigator}
-        options={{
-          drawerIcon: (props) => (
-            <Ionicons
-              name={Platform.OS === "android" ? "md-list" : "ios-list"}
               size={23}
               color={props.color}
             />
@@ -109,14 +90,15 @@ export const TabNavigator = () => {
         tabBarIcon: ({ color, size }) => {
           let iconName;
 
-          if (route.name === "TabShop") {
+          if (route.name === "Shop") {
             iconName = "ios-list";
           } else if (route.name === "Cart") {
             return (
               <IconWithBadge name={"ios-cart"} color={color} size={size} />
             );
+          } else if (route.name === "User") {
+            iconName = "ios-person";
           }
-
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}
@@ -126,8 +108,9 @@ export const TabNavigator = () => {
         showLabel: false,
       }}
     >
-      <ShopTabNavigator.Screen name="TabShop" component={ShopNavigator} />
+      <ShopTabNavigator.Screen name="Shop" component={ShopNavigator} />
       <ShopTabNavigator.Screen name="Cart" component={CartNavigator} />
+      <ShopTabNavigator.Screen name="User" component={UserNavigator} />
     </ShopTabNavigator.Navigator>
   );
 };

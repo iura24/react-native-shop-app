@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import { StatusBar } from "react-native";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 
@@ -51,6 +52,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
+      <StatusBar barStyle="dark-content" />
       <AppNavigator />
     </Provider>
   );

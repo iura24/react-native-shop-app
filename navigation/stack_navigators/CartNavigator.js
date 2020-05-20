@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import CartScreen from "../../screens/shop/CartScreen";
+import CartScreen, { cartScreenOptions } from "../../screens/shop/CartScreen";
 import { defaultNavOptions } from "../../constants/defaultNavOptions";
 
 const CartStackNavigator = createStackNavigator();
@@ -12,7 +12,7 @@ export default CartNavigator = () => {
       <CartStackNavigator.Screen
         name="Cart"
         component={CartScreen}
-        // options={}
+        options={cartScreenOptions}
       />
     </CartStackNavigator.Navigator>
   );

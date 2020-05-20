@@ -9,7 +9,6 @@ import {
   Alert,
   ImageBackground,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch } from "react-redux";
 
 import Input from "../../components/UI/Input";
@@ -83,7 +82,6 @@ const AuthScreen = (props) => {
     setIsLoading(true);
     try {
       await dispatch(action);
-      // props.navigation.navigate("Shop");
     } catch (err) {
       setError(err.message);
       setIsLoading(false);
@@ -101,14 +99,14 @@ const AuthScreen = (props) => {
     },
     [dispatchFormState]
   );
-  const bacggroundImage = {
+  const backgroundImage = {
     uri:
       "https://images.pexels.com/photos/3952076/pexels-photo-3952076.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
   };
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.screen}>
-      {/* <LinearGradient colors={["#be93c5", "#7bc6cc"]} style={styles.gradient}> */}
-      <ImageBackground style={styles.gradient} source={bacggroundImage}>
+      <ImageBackground style={styles.gradient} source={backgroundImage}>
+        <View style={styles.overlay} />
         <Card style={styles.authContainer}>
           <ScrollView>
             <Input
@@ -134,42 +132,45 @@ const AuthScreen = (props) => {
               onInputChange={inputChangeHandler}
               initialValue=""
             />
-            <View style={styles.buttonContainer}>
-              {isLoading ? (
-                <ActivityIndicator size="small" color={Colors.primary} />
-              ) : (
-                <Button
-                  title={isSignup ? "Sign Up" : "Login"}
-                  color={Colors.primary}
-                  onPress={authHandler}
-                />
-              )}
-            </View>
-            <View style={styles.buttonContainer}>
-              <Button
-                title={`Switch to ${isSignup ? "Login" : "Sign Up"}`}
-                color={Colors.accent}
-                onPress={() => {
-                  setIsSignup((prevState) => !prevState);
-                }}
-              />
-            </View>
           </ScrollView>
+          <View style={styles.buttonContainer}>
+            {isLoading ? (
+              <ActivityIndicator size="small" color={Colors.primary} />
+            ) : (
+              <Button
+                title={isSignup ? "Sign Up" : "Login"}
+                color={Colors.primary}
+                onPress={authHandler}
+              />
+            )}
+            <Button
+              title={`Switch to ${isSignup ? "Login" : "Sign Up"}`}
+              color={Colors.accent}
+              onPress={() => {
+                setIsSignup((prevState) => !prevState);
+              }}
+            />
+          </View>
         </Card>
       </ImageBackground>
-      {/* </LinearGradient> */}
     </KeyboardAvoidingView>
   );
 };
 
 export const authScreenOptions = {
   headerShown: false,
-  headerTitle: "Authenticate",
 };
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+  },
+  overlay: {
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#FFFBFF",
+    position: "absolute",
+    opacity: 0.5,
   },
   gradient: {
     flex: 1,
@@ -180,10 +181,12 @@ const styles = StyleSheet.create({
     width: "80%",
     maxWidth: 400,
     maxHeight: 400,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    margin: 20,
   },
   buttonContainer: {
-    marginTop: 10,
+    marginTop: 20,
   },
 });
 
