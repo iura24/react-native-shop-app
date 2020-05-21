@@ -8,12 +8,18 @@ import ProductDetailScreen, {
   productDetailScreenOptions,
 } from "../../screens/shop/ProductDetailScreen";
 import { defaultNavOptions } from "../../constants/defaultNavOptions";
+import ProductsCategoryScreen, {productsCategoryScreenOptions} from "../../screens/shop/ProductsCategoryScreen";
 
 const ProductsStackNavigator = createStackNavigator();
 
 export default ProductsNavigator = () => {
   return (
     <ProductsStackNavigator.Navigator screenOptions={defaultNavOptions}>
+      <ProductsStackNavigator.Screen
+        name="ProductsCategory"
+        component={ProductsCategoryScreen}
+        options={productsCategoryScreenOptions}
+      />
       <ProductsStackNavigator.Screen
         name="ProductsOverview"
         component={ProductsOverviewScreen}

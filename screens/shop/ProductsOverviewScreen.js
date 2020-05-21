@@ -6,12 +6,9 @@ import {
   FlatList,
   StyleSheet,
   ActivityIndicator,
-  Platform,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-import HeaderButton from "../../components/UI/HeaderButton";
 import ProductItem from "../../components/shop/ProductItem";
 import * as cartAction from "../../store/shop-actions/cart";
 import * as productsActions from "../../store/shop-actions/products";
@@ -24,11 +21,13 @@ const ProductsOverviewScreen = (props) => {
   const products = useSelector((state) => state.products.availableProducts);
   const dispatch = useDispatch();
 
+  const categoryId = props.route.params.categoryId;
+
   const loadProducts = useCallback(async () => {
     setError(null);
     setIsRefreshing(true);
     try {
-      await dispatch(productsActions.fetchProducts());
+      await dispatch(productsActions.fetchProducts(categoryId));
     } catch (err) {
       setError(err.message);
     }
@@ -120,16 +119,16 @@ const ProductsOverviewScreen = (props) => {
 
 export const productsOverviewScreenOptions = (navData) => {
   return {
-    headerTitle: "All products",
-    headerLeft: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Menu"
-          iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
-          onPress={() => navData.navigation.toggleDrawer()}
-        />
-      </HeaderButtons>
-    ),
+    headerTitle: navData.route.params.category,
+    // headerLeft: () => (
+    //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    //     <Item
+    //       title="Menu"
+    //       iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
+    //       onPress={() => navData.navigation.toggleDrawer()}
+    //     />
+    //   </HeaderButtons>
+    // ),
     // headerRight: () => (
     //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
     //     <Item
