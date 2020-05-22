@@ -8,9 +8,11 @@ import {
   StyleSheet,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
 
 import Colors from "../../constants/Colors";
 import * as cartActions from "../../store/shop-actions/cart";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ProductDetailScreen = (props) => {
   const productId = props.route.params.productId;

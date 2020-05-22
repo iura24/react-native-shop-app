@@ -7,6 +7,9 @@ import { productCategory } from "../../data/productCategory";
 import { useSelector } from "react-redux";
 
 const ProductsCategoryScreen = (props) => {
+  // const favProducts = useSelector((state) => state.products.favoriteProducts);
+
+  // console.log(favProducts);
   // const allCategories = useSelector((state) => {
   //   console.log(state);
   //   let categories = [];

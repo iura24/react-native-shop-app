@@ -21,6 +21,7 @@ const ProductsOverviewScreen = (props) => {
   const products = useSelector((state) => state.products.availableProducts);
   const dispatch = useDispatch();
 
+  // const productId =
   const categoryId = props.route.params.categoryId;
 
   const loadProducts = useCallback(async () => {
@@ -54,6 +55,13 @@ const ProductsOverviewScreen = (props) => {
       productTitle: title,
     });
   };
+  const toggleFavoriteHandler = useCallback(
+    (id) => {
+      dispatch(productsActions.toggleFavorite(id));
+    },
+    [dispatch]
+  );
+
 
   if (error) {
     return (
@@ -95,6 +103,9 @@ const ProductsOverviewScreen = (props) => {
           price={itemData.item.price}
           onSelect={() => {
             selectItemHandler(itemData.item.id, itemData.item.title);
+          }}
+          onFavToggle={() => {
+            toggleFavoriteHandler(itemData.item.id);
           }}
         >
           <Button

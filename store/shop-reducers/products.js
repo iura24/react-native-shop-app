@@ -4,18 +4,21 @@ import {
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
   SET_PRODUCTS,
+  TOGGLE_FAVORITE,
 } from "../shop-actions/products";
 import Product from "../../models/product";
 
 const initialState = {
   availableProducts: [],
   userProducts: [],
+  favoriteProducts: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_PRODUCTS:
       return {
+        ...state,
         availableProducts: action.products,
         userProducts: action.userProducts,
       };
@@ -67,6 +70,23 @@ export default (state = initialState, action) => {
           (product) => product.id !== action.pid
         ),
       };
+    case TOGGLE_FAVORITE:
+      const existingIndex = state.favoriteProducts.findIndex(
+        (product) => product.id === action.productId
+      );
+      if (existingIndex >= 0) {
+        const updatedFavoriteProducts = [...state.favoriteProducts];
+        updatedFavoriteProducts.splice(existingIndex, 1);
+        return { ...state, favoriteProducts: updatedFavoriteProducts };
+      } else {
+        const product = state.availableProducts.find(
+          (product) => product.id === action.productId
+        );
+        return {
+          ...state,
+          favoriteProducts: state.favoriteProducts.concat(product),
+        };
+      }
   }
   return state;
 };

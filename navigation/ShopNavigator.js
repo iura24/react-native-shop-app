@@ -18,6 +18,8 @@ import PlacesNavigator from "./stack_navigators/PlacesNavigator";
 import CartNavigator from "./stack_navigators/CartNavigator";
 import IconWithBadge from "../components/UI/IconWithBadge";
 import UserNavigator from "./stack_navigators/UserNavigator";
+import { createStackNavigator } from "@react-navigation/stack";
+import FavoriteProductsScreen from "../screens/shop/FavoriteProductsScreen";
 
 // const ShopDrawerNavigator = createDrawerNavigator();
 
@@ -80,6 +82,18 @@ import UserNavigator from "./stack_navigators/UserNavigator";
 //     </ShopDrawerNavigator.Navigator>
 //   );
 // };
+const FavoriteProductsStackNavigator = createStackNavigator();
+
+export const FavoriteProductsNavigator = () => {
+  return (
+    <FavoriteProductsStackNavigator.Navigator>
+      <FavoriteProductsStackNavigator.Screen
+        name="Favorite"
+        component={FavoriteProductsScreen}
+      />
+    </FavoriteProductsStackNavigator.Navigator>
+  );
+};
 
 const ShopTabNavigator = createBottomTabNavigator();
 
@@ -98,6 +112,8 @@ export const TabNavigator = () => {
             );
           } else if (route.name === "User") {
             iconName = "ios-person";
+          } else if (route.name === "Favorite") {
+            iconName = "ios-heart";
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -110,6 +126,7 @@ export const TabNavigator = () => {
     >
       <ShopTabNavigator.Screen name="Shop" component={ProductsNavigator} />
       <ShopTabNavigator.Screen name="Cart" component={CartNavigator} />
+      <ShopTabNavigator.Screen name="Favorite" component={FavoriteProductsNavigator} />
       <ShopTabNavigator.Screen name="User" component={UserNavigator} />
     </ShopTabNavigator.Navigator>
   );

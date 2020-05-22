@@ -4,6 +4,7 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const SET_PRODUCTS = "SET_PRODUCTS";
+export const TOGGLE_FAVORITE = "TOGGLE_FAVORITE";
 
 export const fetchProducts = (categoryId) => {
   return async (dispatch, getState) => {
@@ -131,5 +132,11 @@ export const updateProduct = (id, title, description, imageUrl) => {
         imageUrl,
       },
     });
+  };
+};
+
+export const toggleFavorite = (productId) => {
+  return (dispatch) => {
+    dispatch({ type: TOGGLE_FAVORITE, productId: productId });
   };
 };

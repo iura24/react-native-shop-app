@@ -8,6 +8,7 @@ import {
   TouchableNativeFeedback,
   Platform,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import Card from "../UI/Card";
 
@@ -24,6 +25,25 @@ const ProductItem = (props) => {
         <TouchableCmp onPress={props.onSelect} useForeground>
           <View>
             <View style={styles.imageContainer}>
+              <TouchableCmp
+                onPress={props.onFavToggle}
+                style={{
+                  position: "absolute",
+                  top: 15,
+                  right: 15,
+                  zIndex: 100,
+                }}
+              >
+                <Ionicons
+                  name={
+                    Platform.OS === "android"
+                      ? "md-heart-empty"
+                      : "ios-heart-empty"
+                  }
+                  size={28}
+                  color="white"
+                />
+              </TouchableCmp>
               <Image style={styles.image} source={{ uri: props.image }} />
             </View>
             <View style={styles.details}>
