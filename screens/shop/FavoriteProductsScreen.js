@@ -1,14 +1,23 @@
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 import { View, Text, StyleSheet, FlatList, Button } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import ProductItem from "../../components/shop/ProductItem";
+import * as productsActions from "../../store/shop-actions/products";
 import Colors from "../../constants/Colors";
 
 const FavoriteProductsScreen = (props) => {
   const favoriteProducts = useSelector(
     (state) => state.products.favoriteProducts
   );
+  const dispatch = useDispatch();
+
+  const selectItemHandler = (id, title) => {
+    props.navigation.navigate("ProductDetail", {
+      productId: id,
+      productTitle: title,
+    });
+  };
 
   if (favoriteProducts.length === 0 || !favoriteProducts) {
     return (
@@ -26,10 +35,10 @@ const FavoriteProductsScreen = (props) => {
           image={itemData.item.imageUrl}
           title={itemData.item.title}
           price={itemData.item.price}
+          productId={itemData.item.id}
           onSelect={() => {
             selectItemHandler(itemData.item.id, itemData.item.title);
           }}
-          onFavToggle={() => {}}
         >
           <Button
             color={Colors.primary}

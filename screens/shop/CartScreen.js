@@ -30,7 +30,6 @@ const CartScreen = (props) => {
         quantity: state.cart.items[key].quantity,
         sum: state.cart.items[key].sum,
       });
-      // console.log(state);
     }
     return transformedCartItems.sort((a, b) =>
       a.productId > b.productId ? 1 : -1

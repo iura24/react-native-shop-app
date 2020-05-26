@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   View,
   Text,
@@ -8,11 +8,20 @@ import {
   TouchableNativeFeedback,
   Platform,
 } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 
+import * as productsActions from "../../store/shop-actions/products";
 import Card from "../UI/Card";
 
 const ProductItem = (props) => {
+  const isFavorite = useSelector((state) =>
+    state.products.favoriteProducts.some(
+      (product) => product.id === props.productId
+    )
+  );
+  const dispatch = useDispatch();
+
   let TouchableCmp = TouchableOpacity;
 
   if (Platform.OS === "android" && Platform.Version >= 21) {
@@ -26,17 +35,18 @@ const ProductItem = (props) => {
           <View>
             <View style={styles.imageContainer}>
               <TouchableCmp
-                onPress={props.onFavToggle}
-                style={{
-                  position: "absolute",
-                  top: 15,
-                  right: 15,
-                  zIndex: 100,
+                onPress={() => {
+                  dispatch(productsActions.toggleFavorite(props.productId));
                 }}
+                style={styles.icon}
               >
                 <Ionicons
                   name={
-                    Platform.OS === "android"
+                    isFavorite
+                      ? Platform.OS === "android"
+                        ? "md-heart"
+                        : "ios-heart"
+                      : Platform.OS === "android"
                       ? "md-heart-empty"
                       : "ios-heart-empty"
                   }
@@ -98,6 +108,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "23%",
     paddingHorizontal: 20,
+  },
+  icon: {
+    position: "absolute",
+    right: 0,
+    zIndex: 100,
+    height: 60,
+    width: 60,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

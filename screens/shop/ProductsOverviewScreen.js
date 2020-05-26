@@ -15,14 +15,13 @@ import * as productsActions from "../../store/shop-actions/products";
 import Colors from "../../constants/Colors";
 
 const ProductsOverviewScreen = (props) => {
+  const categoryId = props.route.params.categoryId;
+
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState();
   const products = useSelector((state) => state.products.availableProducts);
   const dispatch = useDispatch();
-
-  // const productId =
-  const categoryId = props.route.params.categoryId;
 
   const loadProducts = useCallback(async () => {
     setError(null);
@@ -55,13 +54,6 @@ const ProductsOverviewScreen = (props) => {
       productTitle: title,
     });
   };
-  const toggleFavoriteHandler = useCallback(
-    (id) => {
-      dispatch(productsActions.toggleFavorite(id));
-    },
-    [dispatch]
-  );
-
 
   if (error) {
     return (
@@ -101,11 +93,10 @@ const ProductsOverviewScreen = (props) => {
           image={itemData.item.imageUrl}
           title={itemData.item.title}
           price={itemData.item.price}
+          product={itemData.item}
+          productId={itemData.item.id}
           onSelect={() => {
             selectItemHandler(itemData.item.id, itemData.item.title);
-          }}
-          onFavToggle={() => {
-            toggleFavoriteHandler(itemData.item.id);
           }}
         >
           <Button
